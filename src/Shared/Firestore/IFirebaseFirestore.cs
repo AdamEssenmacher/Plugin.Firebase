@@ -35,6 +35,19 @@ namespace Plugin.Firebase.Firestore
         /// </summary>
         /// <returns></returns>
         IWriteBatch CreateBatch();
+        
+        /// <summary>
+        /// Disables network access for this instance. While the network is disabled, any snapshot listeners or get() calls will
+        /// return results from cache, and any write operations will be queued until network usage is re-enabled via a call to enableNetwork
+        /// </summary>
+        /// <returns></returns>
+        Task DisableNetworkAsync();
+
+        /// <summary>
+        /// Re-enables network usage for this instance after a prior call to <c>DisableNetworkAsync</c>.
+        /// </summary>
+        /// <returns></returns>
+        Task EnableNetworkAsync();
 
         /// <summary>
         /// Modifies this FirebaseDatabase instance to communicate with the Cloud Firestore emulator.

@@ -37,6 +37,16 @@ namespace Plugin.Firebase.Firestore
         {
             return _firestore.Batch().ToAbstract();
         }
+        
+        public Task DisableNetworkAsync()
+        {
+            return _firestore.DisableNetwork().AsAsync();
+        }
+
+        public Task EnableNetworkAsync()
+        {
+            return _firestore.EnableNetwork().AsAsync();
+        }
 
         public void UseEmulator(string host, int port)
         {
