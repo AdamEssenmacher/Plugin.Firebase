@@ -35,6 +35,8 @@ namespace Plugin.Firebase.iOS.Extensions
                     var value = @this[attribute.PropertyName];
                     if(value == null) {
                         Console.WriteLine($"[Plugin.Firebase] Couldn't cast property '{attribute.PropertyName}' of '{targetType}' because it's not contained in the NSDictionary.");
+                    } else if((Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType).IsEnum && value is not NSNull) {
+                        property.SetValue(instance, Enum.ToObject(Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType, value.ToObject()));
                     } else {
                         property.SetValue(instance, value.ToObject(property.PropertyType));
                     }
