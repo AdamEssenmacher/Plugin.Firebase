@@ -43,6 +43,8 @@ namespace Plugin.Firebase.Android.Extensions
                         property.SetValue(instance, javaValue.ToObject(property.PropertyType));
                     } else if(property.PropertyType == typeof(float)) {
                         property.SetValue(instance, Convert.ToSingle(value));
+                    } else if((Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType) == typeof(int)) {
+                        property.SetValue(instance, Convert.ToInt32(value));
                     } else {
                         property.SetValue(instance, value);
                     }
