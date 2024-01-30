@@ -157,6 +157,8 @@ public static class JavaObjectExtensions
                     property.SetValue(instance, Convert.ToSingle(value));
                 } else if((Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType) == typeof(int)) {
                     property.SetValue(instance, Convert.ToInt32(value));
+                } else if((Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType).IsEnum) {
+                    property.SetValue(instance, Enum.ToObject(Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType, value));
                 } else {
                     property.SetValue(instance, value);
                 }
